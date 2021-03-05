@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, catchError, startWith } from 'rxjs/operators';
 import { Product } from 'src/app/model/product.model';
@@ -14,7 +15,10 @@ export class ProductsComponent implements OnInit {
   products$: Observable<AppDataState<Product[]>> | null = null;
   readonly DataStateEnum = DataStateEnum;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -79,5 +83,13 @@ export class ProductsComponent implements OnInit {
         this.onGetAllProducts();
       });
     }
+  }
+
+  onNewProduct() {
+    this.router.navigateByUrl('/newProduct');
+  }
+
+  onUpdate(p: Product) {
+    this.router.navigateByUrl('/updateProduct/' + p.id);
   }
 }

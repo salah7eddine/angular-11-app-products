@@ -17,6 +17,10 @@ export class ProductsService {
     return this.http.get<Product[]>(this.host + 'products');
   }
 
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(this.host + 'products/' + id);
+  }
+
   getSelectedProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.host + 'products?selected=true');
   }
@@ -41,5 +45,16 @@ export class ProductsService {
 
   deleteProduct(product: Product): Observable<void> {
     return this.http.delete<void>(this.host + 'products/' + product.id);
+  }
+
+  save(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.host + 'products', product);
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(
+      this.host + 'products/' + product.id,
+      product
+    );
   }
 }
