@@ -6,10 +6,26 @@
       "price": 4300,
       "quantity": 600,
       "selected": true,
-      "available": true
+      "available": false
     },
     {
       "id": 2,
+      "name": "Printer",
+      "price": 300,
+      "quantity": 100,
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "Computer",
+      "price": 4300,
+      "quantity": 600,
+      "selected": true,
+      "available": false
+    },
+    {
+      "id": 4,
       "name": "Printer",
       "price": 300,
       "quantity": 100,
@@ -17,12 +33,12 @@
       "available": true
     },
     {
-      "id": 3,
-      "name": "Smart phone",
-      "price": 1300,
-      "quantity": 100,
+      "id": 5,
+      "name": "Computer",
+      "price": 4300,
+      "quantity": 600,
       "selected": false,
-      "available": true
+      "available": false
     }
   ]
 }

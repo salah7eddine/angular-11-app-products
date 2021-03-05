@@ -11,33 +11,73 @@ import { AppDataState, DataStateEnum } from 'src/app/state/product.state';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  // products: Product[] | null = null;
   products$: Observable<AppDataState<Product[]>> | null = null;
+  readonly DataStateEnum = DataStateEnum;
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {}
 
-  // Solution One
-  // onGetAllProducts() {
-  //   this.productsService.getAllProducts().subscribe(
-  //     (data) => {
-  //       this.products = data;
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
-
-  // Solution two
   onGetAllProducts() {
     this.products$ = this.productsService.getAllProducts().pipe(
-      map((data) => ({ dataState: DataStateEnum.LOADED, data: data })),
+      map((data) => {
+        return { dataState: DataStateEnum.LOADED, data: data };
+      }),
       startWith({ dataState: DataStateEnum.LOADING }),
       catchError((err) =>
         of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
       )
     );
+  }
+
+  onGetSelectedProducts() {
+    this.products$ = this.productsService.getSelectedProducts().pipe(
+      map((data) => {
+        return { dataState: DataStateEnum.LOADED, data: data };
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((err) =>
+        of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
+      )
+    );
+  }
+
+  onGetAvailableProducts() {
+    this.products$ = this.productsService.getAvailableProducts().pipe(
+      map((data) => {
+        return { dataState: DataStateEnum.LOADED, data: data };
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((err) =>
+        of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
+      )
+    );
+  }
+
+  onSearch(dataForm: any) {
+    this.products$ = this.productsService.searchProducts(dataForm.keyWord).pipe(
+      map((data) => {
+        return { dataState: DataStateEnum.LOADED, data: data };
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((err) =>
+        of({ dataState: DataStateEnum.ERROR, errorMessage: err.message })
+      )
+    );
+  }
+
+  onSelect(p) {
+    this.productsService.select(p).subscribe((data) => {
+      p.selected = data.selected;
+    });
+  }
+
+  onDelete(product) {
+    let v = confirm('you wanna delete this product ?');
+    if (v == true) {
+      this.productsService.deleteProduct(product).subscribe((data) => {
+        this.onGetAllProducts();
+      });
+    }
   }
 }

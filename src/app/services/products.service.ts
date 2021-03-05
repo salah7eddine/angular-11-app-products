@@ -13,14 +13,33 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<Product[]> {
+    // let host = Math.random() > 0.2 ? environment.host : environment.unreachableHost;
     return this.http.get<Product[]>(this.host + 'products');
   }
 
   getSelectedProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.host + 'products?select=true');
+    return this.http.get<Product[]>(this.host + 'products?selected=true');
   }
 
   getAvailableProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.host + 'products?available=true');
+  }
+
+  searchProducts(keyWord: string): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      this.host + 'products?name_like=' + keyWord
+    );
+  }
+
+  select(product: Product): Observable<Product> {
+    product.selected = !product.selected;
+    return this.http.put<Product>(
+      this.host + 'products/' + product.id,
+      product
+    );
+  }
+
+  deleteProduct(product: Product): Observable<void> {
+    return this.http.delete<void>(this.host + 'products/' + product.id);
   }
 }
