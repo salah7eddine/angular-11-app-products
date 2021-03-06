@@ -17,36 +17,36 @@ import {
 })
 export class ProductsListComponent implements OnInit {
   @Input() productsInput$: Observable<AppDataState<Product[]>> | null = null;
-  @Output()
-  productsEventEmitter: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
+  // @Output()
+  // productsEventEmitter: EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>();
   readonly DataStateEnum = DataStateEnum;
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onSelect(p: Product) {
-    this.productsEventEmitter.emit({
-      type: ProductActionTypes.SELECT_PRODUCT,
-      payload: p,
-    });
-  }
+  // onSelect(p: Product) {
+  //   this.productsEventEmitter.emit({
+  //     type: ProductActionTypes.SELECT_PRODUCT,
+  //     payload: p,
+  //   });
+  // }
 
-  onDelete(p: Product) {
-    this.productsEventEmitter.emit({
-      type: ProductActionTypes.DELETE_PRODUCT,
-      payload: p,
-    });
-  }
+  // onDelete(p: Product) {
+  //   this.productsEventEmitter.emit({
+  //     type: ProductActionTypes.DELETE_PRODUCT,
+  //     payload: p,
+  //   });
+  // }
 
-  onUpdate(p: Product) {
-    this.productsEventEmitter.emit({
-      type: ProductActionTypes.UPDATE_PRODUCT,
-      payload: p,
-    });
-  }
+  // onUpdate(p: Product) {
+  //   this.productsEventEmitter.emit({
+  //     type: ProductActionTypes.UPDATE_PRODUCT,
+  //     payload: p,
+  //   });
+  // }
 
-  onActionEvent($event: ActionEvent) {
-    this.productsEventEmitter.emit($event);
-  }
+  // onActionEvent($event: ActionEvent) {
+  //   this.productsEventEmitter.emit($event);
+  // }
 }

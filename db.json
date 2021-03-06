@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "name": "Computer",
+      "name": "Computer 1122",
       "price": 4300,
       "quantity": 600,
       "selected": true,
@@ -13,7 +13,7 @@
       "name": "Printer",
       "price": 300,
       "quantity": 100,
-      "selected": false,
+      "selected": true,
       "available": true
     },
     {
@@ -21,7 +21,7 @@
       "name": "Computer",
       "price": 4300,
       "quantity": 600,
-      "selected": false,
+      "selected": true,
       "available": false
     },
     {
@@ -30,14 +30,6 @@
       "price": 300,
       "quantity": 100,
       "selected": true,
-      "available": true
-    },
-    {
-      "id": 5,
-      "name": "Computer AZUR",
-      "price": "2300",
-      "quantity": "800",
-      "selected": false,
       "available": true
     }
   ]

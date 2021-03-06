@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { EventDriverService } from 'src/app/state/event.driver.service';
 import { ActionEvent, ProductActionTypes } from 'src/app/state/product.state';
 
 @Component({
@@ -8,37 +9,59 @@ import { ActionEvent, ProductActionTypes } from 'src/app/state/product.state';
   styleUrls: ['./products-nav-bar.component.css'],
 })
 export class ProductsNavBarComponent implements OnInit {
-  @Output() productEventEmitter: EventEmitter<ActionEvent> = new EventEmitter();
-  constructor() {}
+  //@Output() productEventEmitter: EventEmitter<ActionEvent> = new EventEmitter();
+
+  constructor(private eventDrivenService: EventDriverService) {}
 
   ngOnInit(): void {}
 
   onGetAllProducts() {
-    this.productEventEmitter.emit({
+    // this.productEventEmitter.emit({
+    //   type: ProductActionTypes.GET_ALL_PRODUCTS,
+    // });
+
+    this.eventDrivenService.publishEvent({
       type: ProductActionTypes.GET_ALL_PRODUCTS,
     });
   }
 
   onGetSelectedProducts() {
-    this.productEventEmitter.emit({
+    // this.productEventEmitter.emit({
+    //   type: ProductActionTypes.GET_SELECTED_PRODUCTS,
+    // });
+
+    this.eventDrivenService.publishEvent({
       type: ProductActionTypes.GET_SELECTED_PRODUCTS,
     });
   }
 
   onGetAvailableProducts() {
-    this.productEventEmitter.emit({
+    // this.productEventEmitter.emit({
+    //   type: ProductActionTypes.GET_AVAILABLE_PRODUCTS,
+    // });
+
+    this.eventDrivenService.publishEvent({
       type: ProductActionTypes.GET_AVAILABLE_PRODUCTS,
     });
   }
 
   onNewProduct() {
-    this.productEventEmitter.emit({
+    // this.productEventEmitter.emit({
+    //   type: ProductActionTypes.NEW_PRODUCT,
+    // });
+
+    this.eventDrivenService.publishEvent({
       type: ProductActionTypes.NEW_PRODUCT,
     });
   }
 
   onSearch(dataForm: any) {
-    this.productEventEmitter.emit({
+    // this.productEventEmitter.emit({
+    //   type: ProductActionTypes.SEARCH_PRODUCTS,
+    //   payload: dataForm,
+    // });
+
+    this.eventDrivenService.publishEvent({
       type: ProductActionTypes.SEARCH_PRODUCTS,
       payload: dataForm,
     });

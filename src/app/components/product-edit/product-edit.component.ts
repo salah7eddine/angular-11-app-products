@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { EventDriverService } from 'src/app/state/event.driver.service';
+import { ProductActionTypes } from 'src/app/state/product.state';
 
 @Component({
   selector: 'app-product-edit',
@@ -16,7 +18,8 @@ export class ProductEditComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private eventDrivenService: EventDriverService
   ) {
     this.productId = this.activatedRoute.snapshot.params.id;
   }
@@ -38,6 +41,9 @@ export class ProductEditComponent implements OnInit {
     this.productService
       .updateProduct(this.productFormGroup?.value)
       .subscribe((data) => {
+        this.eventDrivenService.publishEvent({
+          type: ProductActionTypes.PRODUCT_UPDATED,
+        });
         alert('Success Product Updated');
       });
   }
