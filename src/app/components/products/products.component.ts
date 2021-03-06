@@ -47,6 +47,15 @@ export class ProductsComponent implements OnInit {
       case ProductActionTypes.NEW_PRODUCT:
         this.onNewProduct();
         break;
+      case ProductActionTypes.SELECT_PRODUCT:
+        this.onSelect($event.payload);
+        break;
+      case ProductActionTypes.UPDATE_PRODUCT:
+        this.onUpdate($event.payload);
+        break;
+      case ProductActionTypes.DELETE_PRODUCT:
+        this.onDelete($event.payload);
+        break;
     }
   }
 
@@ -98,13 +107,13 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  onSelect(p) {
+  onSelect(p: Product) {
     this.productsService.select(p).subscribe((data) => {
       p.selected = data.selected;
     });
   }
 
-  onDelete(product) {
+  onDelete(product: Product) {
     let v = confirm('you wanna delete this product ?');
     if (v == true) {
       this.productsService.deleteProduct(product).subscribe((data) => {
