@@ -21,7 +21,7 @@
       "name": "Computer",
       "price": 4300,
       "quantity": 600,
-      "selected": true,
+      "selected": false,
       "available": false
     },
     {
@@ -35,18 +35,10 @@
     {
       "id": 5,
       "name": "Computer AZUR",
-      "price": "1300",
+      "price": "2300",
       "quantity": "800",
-      "selected": true,
-      "available": true
-    },
-    {
-      "name": "Hello",
-      "price": "200",
-      "quantity": "100",
       "selected": false,
-      "available": true,
-      "id": 6
+      "available": true
     }
   ]
 }

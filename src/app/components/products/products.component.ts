@@ -4,7 +4,12 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, startWith } from 'rxjs/operators';
 import { Product } from 'src/app/model/product.model';
 import { ProductsService } from 'src/app/services/products.service';
-import { AppDataState, DataStateEnum } from 'src/app/state/product.state';
+import {
+  ActionEvent,
+  AppDataState,
+  DataStateEnum,
+  ProductActionTypes,
+} from 'src/app/state/product.state';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +26,29 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  onActionEvent($event: ActionEvent) {
+    switch ($event.type) {
+      case ProductActionTypes.GET_ALL_PRODUCTS:
+        this.onGetAllProducts();
+        break;
+      case ProductActionTypes.GET_SELECTED_PRODUCTS:
+        this.onGetSelectedProducts();
+        break;
+      case ProductActionTypes.GET_AVAILABLE_PRODUCTS:
+        this.onGetAvailableProducts();
+        break;
+      case ProductActionTypes.SEARCH_PRODUCTS:
+        this.onSearch($event.payload);
+        break;
+      case ProductActionTypes.GET_ALL_PRODUCTS:
+        this.onGetAllProducts();
+        break;
+      case ProductActionTypes.NEW_PRODUCT:
+        this.onNewProduct();
+        break;
+    }
+  }
 
   onGetAllProducts() {
     this.products$ = this.productsService.getAllProducts().pipe(
